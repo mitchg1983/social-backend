@@ -33,4 +33,16 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser };
+//Login to an existing user, get jsonwebtoken, POST method.
+//
+//
+const userLogin = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    res.send("userLogin is running");
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
+module.exports = { createUser, userLogin };

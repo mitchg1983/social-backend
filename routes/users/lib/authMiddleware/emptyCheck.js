@@ -1,5 +1,6 @@
 const { isEmpty } = require("validator");
 
+//MIDDLEWARE
 function emptyCheck(req, res, next) {
   let errObj = {};
   let body = req.body;

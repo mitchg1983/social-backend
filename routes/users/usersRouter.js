@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { createUser } = require("./controller/userController");
+const { createUser, userLogin } = require("./controller/userController");
 const { emptyCheck, valiDataCreate } = require("./lib/authMiddleware/index")
 
 /* GET users listing. */
@@ -9,5 +9,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/create-user", emptyCheck, valiDataCreate, createUser);
+
+router.post("/login", emptyCheck, userLogin)
 
 module.exports = router;
