@@ -45,4 +45,9 @@ const userLogin = async (req, res, next) => {
   }
 };
 
+////////////////////////////////////////////////////////////////////////
+//NOTES
+/////////////////
+//Move emptyCheck out of authMiddleware to a new 'utils' folder
+
 module.exports = { createUser, userLogin };
