@@ -4,6 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const mongoose = require("mongoose")
+require("dotenv").config()
+
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to social-backend MONGODB");
+  })
+  .catch((error) => {
+    console.log("Error", error);
+  });
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
