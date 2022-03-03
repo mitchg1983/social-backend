@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { createUser, userLogin } = require("./controller/userController");
-const { emptyCheck, valiDataCreate } = require("./lib/authMiddleware/index")
+const { emptyCheck, valiDataCreate, valiDataLogin } = require("./lib/authMiddleware/index")
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -10,6 +10,6 @@ router.get("/", function (req, res, next) {
 
 router.post("/create-user", emptyCheck, valiDataCreate, createUser);
 
-router.post("/login", emptyCheck, userLogin)
+router.post("/login", emptyCheck, valiDataLogin, userLogin)
 
 module.exports = router;
