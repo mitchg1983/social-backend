@@ -1,6 +1,7 @@
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { errorHandler } = require("../utils/errorHandler");
 
 //Create a new user, POST method.
 //
@@ -70,7 +71,20 @@ const userLogin = async (req, res) => {
 //
 const updateProfile = async (req, res) => {
   try {
-    res.send("updateProfile running");
+    const decodedToken = res.locals.decodedToken;
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    req.body.password = hashedPassword;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { email: decodedToken.email },
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json({ message: "User is updated.", payload: updatedUser });
   } catch (error) {
     res.status(500).json({ error: errorHandler(error) });
   }
