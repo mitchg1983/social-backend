@@ -65,9 +65,21 @@ const userLogin = async (req, res) => {
   }
 };
 
+//Update User Profile, PUT method
+//
+//
+const updateProfile = async (req, res) => {
+    try {
+        res.send("updateProfile running")
+    } catch (error) {
+        res.status(500).json({ error: errorHandler(error) });
+    }
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 //NOTES
 /////////////////
 //Move emptyCheck out of authMiddleware to a new 'utils' folder
 
-module.exports = { createUser, userLogin };
+module.exports = { createUser, userLogin, updateProfile };
