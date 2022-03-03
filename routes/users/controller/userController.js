@@ -41,11 +41,11 @@ const userLogin = async (req, res) => {
     console.log("userLogin is running.");
     const { email, password } = req.body;
     const foundUser = await User.findOne({ email: email });
-    console.log(foundUser)
+    console.log(foundUser);
     if (foundUser === null) throw { message: "Email not found." };
 
     const matchPassword = await bcrypt.compare(password, foundUser.password);
-    console.log(matchPassword)
+    console.log(matchPassword);
 
     if (!matchPassword) throw { message: "Email & Password do not match." };
 
@@ -69,17 +69,36 @@ const userLogin = async (req, res) => {
 //
 //
 const updateProfile = async (req, res) => {
-    try {
-        res.send("updateProfile running")
-    } catch (error) {
-        res.status(500).json({ error: errorHandler(error) });
-    }
-}
+  try {
+    res.send("updateProfile running");
+  } catch (error) {
+    res.status(500).json({ error: errorHandler(error) });
+  }
+};
 
+//Get Current User, GET method
+//
+//
+const getCurrentUser = async (req, res) => {
+  try {
+      
+    console.log(res.locals)
+
+    const { decodedToken } = res.locals;
+
+    console.log("This is your...", decodedToken);
+
+    res.send("getCurrentUser is running")
+
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 ////////////////////////////////////////////////////////////////////////
 //NOTES
 /////////////////
 //Move emptyCheck out of authMiddleware to a new 'utils' folder
 
-module.exports = { createUser, userLogin, updateProfile };
+module.exports = { createUser, userLogin, updateProfile, getCurrentUser };
