@@ -36,12 +36,32 @@ const createUser = async (req, res, next) => {
 //Login to an existing user, get jsonwebtoken, POST method.
 //
 //
-const userLogin = async (req, res, next) => {
+const userLogin = async (req, res) => {
   try {
-    console.log(req.body);
-    res.send("userLogin is running");
+    console.log("userLogin is running.");
+    const { email, password } = req.body;
+    const foundUser = await User.findOne({ email: email });
+    console.log(foundUser)
+    if (foundUser === null) throw { message: "Email not found." };
+
+    const matchPassword = await bcrypt.compare(password, foundUser.password);
+    console.log(matchPassword)
+
+    if (!matchPassword) throw { message: "Email & Password do not match." };
+
+    const jwtToken = jwt.sign(
+      {
+        firstName: foundUser.firstName,
+        lastName: foundUser.lastName,
+        email: foundUser.email,
+        username: foundUser.username,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: "12h" }
+    );
+    res.status(200).json({ payload: jwtToken });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 };
 
