@@ -10,6 +10,7 @@ const {
   emptyCheck,
   valiDataCreate,
   valiDataLogin,
+  valiDataUpdate,
   jwtMiddleware,
 } = require("./lib/authMiddleware/index");
 
@@ -24,6 +25,6 @@ router.post("/create-user", emptyCheck, valiDataCreate, createUser);
 
 router.post("/login", emptyCheck, valiDataLogin, userLogin);
 
-router.put("/update-profile", updateProfile);
+router.put("/update-profile", jwtMiddleware, emptyCheck, valiDataUpdate, updateProfile);
 
 module.exports = router;

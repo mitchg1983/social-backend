@@ -83,15 +83,16 @@ const getCurrentUser = async (req, res) => {
   try {
     const { decodedToken } = res.locals;
     const foundUser = await User.findOne({
-        email: decodedToken.email,
-    })
+      email: decodedToken.email,
+    });
 
-    // console.log("This is your foundUser", foundUser);
-
-    res.status(200).json({ message: "Current user information.", payload: foundUser})
-
+    res
+      .status(200)
+      .json({ message: "Current user information.", payload: foundUser });
   } catch (error) {
-    res.status(500).json({ message: "Error from getCurrentUser.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error from getCurrentUser.", error: error.message });
   }
 };
 
