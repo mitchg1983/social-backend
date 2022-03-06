@@ -7,16 +7,10 @@ const userSchema = new mongoose.Schema(
     email: { type: String, unique: true },
     username: { type: String, unique: true },
     password: String,
-
-    //code from ginny, app will crash until these schemas are created
-    //
-    // postHistory: [{ type: mongoose.Schema.ObjectID, ref: "post"}],
-    // commentHistory: [{ type: mongoose.Schema.ObjectID, ref: "comment"}],
-
-
+    postHistory: [{ type: mongoose.Schema.ObjectId, ref: "post" }],
+    commentHistory: [{ type: mongoose.Schema.ObjectId, ref: "comment" }],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("user", userSchema)
-
+module.exports = mongoose.model("user", userSchema);
