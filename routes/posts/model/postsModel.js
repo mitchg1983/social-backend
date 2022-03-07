@@ -5,6 +5,8 @@ const postSchema = new mongoose.Schema(
     title: String,
     post: String,
     owner: String,
+    commentHistory: [{ type: mongoose.Schema.ObjectId, ref: "comment" }],
+    owner: {type: mongoose.Schema.ObjectId, ref: "user"},
   },
   { timestamps: true }
 );

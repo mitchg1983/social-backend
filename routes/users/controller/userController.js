@@ -1,7 +1,7 @@
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { errorHandler } = require("../utils/errorHandler");
+const { errorHandler } = require("../../utils/index");
 
 //Create a new user, POST method.
 //

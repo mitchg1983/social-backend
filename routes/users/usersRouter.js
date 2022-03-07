@@ -12,7 +12,7 @@ const {
   valiDataUpdate,
   jwtMiddleware,
 } = require("./lib/authMiddleware/index");
-const { emptyCheck } = require("./utils/emptyCheck");
+const { emptyCheck } = require("../utils/emptyCheck");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {

@@ -1,7 +1,3 @@
-//make a function that takes in our errors coming in from our userController
-//mix of mongodb error and other errors in our controller
-//in users: only used in the create and update
-
 const parsedError = (err) => {
   let objectKeys = Object.keys(err.keyValue);
   let objectValues = Object.values(err.keyValue);
